@@ -19,7 +19,7 @@ function App() {
 					<h2 className="sr-only">Features</h2>
 					<div className="feature-item">
 						<img
-							src="./assets/icon-chat.png"
+							src="./assets/icon-chat.webp"
 							alt="Chat Icon"
 							className="feature-icon"
 						/>
@@ -31,7 +31,7 @@ function App() {
 					</div>
 					<div className="feature-item">
 						<img
-							src="./assets/icon-money.png"
+							src="./assets/icon-money.webp"
 							alt="Chat Icon"
 							className="feature-icon"
 						/>
@@ -44,7 +44,7 @@ function App() {
 					</div>
 					<div className="feature-item">
 						<img
-							src="./assets/icon-security.png"
+							src="./assets/icon-security.webp"
 							alt="Chat Icon"
 							className="feature-icon"
 						/>
