@@ -9,7 +9,7 @@ function Login() {
 	const [password, setPassword] = useState();
 	const navigate = useNavigate();
 	const dispatch = useDispatch();
-	const [isLoading, setLoading] = useState(true);
+	const [isLoading, setLoading] = useState(false);
 	const [error, setError] = useState(false);
 
 	async function onSubmit(e) {
@@ -26,8 +26,8 @@ function Login() {
 			console.log(e);
 			setError(true);
 		} finally {
-			setLoading(false);
 			navigate('/profile');
+			setLoading(false);
 		}
 	}
 
@@ -56,7 +56,11 @@ function Login() {
 						<input type="checkbox" id="remember-me" />
 						<label htmlFor="remember-me">Remember me</label>
 					</div>
-					<button className="sign-in-button">Sign In</button>
+					{error && (
+						<p className="Message-error">Email or password incorrect</p>
+					)}
+
+					{!isLoading && <button className="sign-in-button">Sign In</button>}
 				</form>
 			</section>
 		</main>
