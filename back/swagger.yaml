@@ -9,6 +9,89 @@ basePath: /api/v1
 schemes:
   - http
 paths:
+  /transactions/currentMonth:
+    get:
+      summary: Obtenez toutes les transactions pour le mois en cours
+      description: |
+        Cette API retourne toutes les transactions pour le mois en cours, groupées par compte.
+      responses:
+        '200':
+          description: Succès
+        '404':
+          description: Aucune transaction trouvée
+            /transactions/{id}:
+    get:
+      summary: Obtenez les détails d'une transaction
+      description: |
+        Cette API retourne les détails d'une transaction spécifique.
+      parameters:
+        - name: id
+          in: path
+          description: ID de la transaction
+          required: true
+          type: integer
+      responses:
+        '200':
+          description: Succès
+        '404':
+          description: Transaction non trouvée
+  /transactions/{id}:
+    put:
+      summary: Mettez à jour une transaction
+      description: |
+        Cette API met à jour les informations d'une transaction spécifique.
+      parameters:
+        - name: id
+          in: path
+          description: ID de la transaction
+          required: true
+          type: integer
+        - name: transaction
+          in: body
+          description: Informations sur la transaction à mettre à jour
+          required: true
+          schema:
+            $ref: '#/definitions/Transaction'
+      responses:
+        '200':
+          description: Succès
+        '400':
+          description: Mauvaise demande
+        '404':
+          description: Transaction non trouvée
+          
+    delete:
+      summary: Supprimez une transaction
+      description: |
+        Cette API supprime une transaction spécifique.
+      parameters:
+        - name: id
+          in: path
+          description: ID de la transaction
+          required: true
+          type: integer
+      responses:
+        '200':
+          description: Succès
+        '404':
+          description: Transaction non trouvée
+  definitions:
+  Transaction:
+    type: object
+    properties:
+      id:
+        type: integer
+      account:
+        type: string
+      details:
+        type: string
+      amount:
+        type: number
+      date:
+        type: string
+        format: date-time
+
+
   /user/login:
     post:
       tags:
