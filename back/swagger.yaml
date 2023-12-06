@@ -9,7 +9,7 @@ basePath: /api/v1
 schemes:
   - http
 paths:
-  /transactions/currentMonth:
+  /transactions/{userid}/currentMonth:
     get:
       summary: Obtenez toutes les transactions pour le mois en cours
       description: |
@@ -21,9 +21,9 @@ paths:
           description: Aucune transaction trouvée
             /transactions/{id}:
     get:
-      summary: Obtenez les détails d'une transaction
+      summary: Obtenez les informations d'une transaction
       description: |
-        Cette API retourne les détails d'une transaction spécifique.
+        Cette API retourne les informations d'une transaction spécifique.
       parameters:
         - name: id
           in: path
@@ -35,9 +35,27 @@ paths:
           description: Succès
         '404':
           description: Transaction non trouvée
-  /transactions/{id}:
+  /transaction/{id}/get/informations/:
+    get:
+      summary: Obtenez les informations d'une transaction
+      description: |
+        Cette API retourne les informations d'une transaction spécifique.
+      parameters:
+        - name: id
+          in: path
+          description: ID de la transaction
+          required: true
+          type: integer
+      responses:
+        '200':
+          description: Succès
+        '401': 
+          description: Non authorisé
+        '404':
+          description: Transaction non trouvée
+  /transaction/{id}/edit/informations/:
     put:
-      summary: Mettez à jour une transaction
+      summary: Mettez à jour les informations d'une transaction
       description: |
         Cette API met à jour les informations d'une transaction spécifique.
       parameters:
@@ -57,13 +75,41 @@ paths:
           description: Succès
         '400':
           description: Mauvaise demande
+        '401': 
+          description: Non authorisé
         '404':
           description: Transaction non trouvée
-          
-    delete:
-      summary: Supprimez une transaction
+  /transaction/{id}/add/informations/:
+   post:
+      summary: Ajouter des informations d'une transaction
       description: |
-        Cette API supprime une transaction spécifique.
+        Cette API ajoute les informations d'une transaction spécifique.
+      parameters:
+        - name: id
+          in: path
+          description: ID de la transaction
+          required: true
+          type: integer
+        - name: transaction
+          in: body
+          description: Informations sur la transaction à ajouter
+          required: true
+          schema:
+            $ref: '#/definitions/Transaction'
+      responses:
+        '200':
+          description: Succès
+        '400':
+          description: Mauvaise demande
+        '401': 
+          description: Non authorisé
+        '404':
+          description: Transaction non trouvée
+  /transaction/{id}/delete/informations/:
+    delete:
+      summary: Supprimer les informations de la transaction
+      description: |
+        Cette API supprime les informations d'une transaction spécifique.
       parameters:
         - name: id
           in: path
@@ -73,6 +119,8 @@ paths:
       responses:
         '200':
           description: Succès
+        '401': 
+          description: Non authorisé
         '404':
           description: Transaction non trouvée
   definitions:
@@ -90,8 +138,6 @@ paths:
       date:
         type: string
         format: date-time
-
-
   /user/login:
     post:
       tags:
